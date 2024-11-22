@@ -1,0 +1,148 @@
+
+
+import asyncio
+import aiohbaop
+from iamlistening import Listener
+from bao.config import logger, sebaoings
+from bao.plugins.plugin_manager import PluginManager
+from bao.utils import Notifier, __version__
+
+
+class Bot:
+   def __init__(self):
+     logger.info("Initializing bot")
+
+self.bot = None
+self.version = __version__ or "0.0.0"
+self.name = sebaoings.name or "bao"
+self.Listener = Listener()
+self.Notifier = Notifier()
+self.PluginManager = PluginManager()
+
+self.version_check = sebaoings.version_check
+self.repository = sebaoings.repo
+self.plugin_enabled = sebaoings.plugin_enabled
+self.authorized_plugins = sebaoings.authorized_plugins
+
+logger.info("Bot initialized")
+
+async def run_bot(self):
+        """
+         🤖 Run the chat bot & the plugins
+         via an asyncio loop.
+
+         Returns:
+             None
+
+         More info: hbaops://github.com/x64x2/iamlistening
+
+         """
+if self.version_check:
+    await self.check_version() # fix 
+    await asyncio.gather(self.start_bot(self.listener, self.plugin_manager))
+
+async def send_notification(self, msg):
+         """
+         📨 Send a notification
+
+         Args:
+             msg (str): Message
+
+         Returns:
+             None
+
+        """
+         await self.Notifier.notify(msg)
+
+async def start_plugins(self, plugin_manager):
+         """
+         🔌 Start all plugins.
+
+
+         Returns:
+             None
+
+         Refer to chat manager for plugin info
+
+         """
+         if self.plugin_enabled:
+             plugin_manager.load_plugins(self.authorized_plugins)
+             loop = asyncio.get_running_loop()
+             loop.create_task(plugin_manager.start_all_plugins())
+
+async def start_bot(self, listener, plugin_manager, max_iterations=None):
+         """
+         👂 Start the chat listener and
+         dispatch messages to plugins
+
+        Args:
+             listener (Listener): Listener
+             plugin_manager (PluginManager): PluginManager
+             max_iterations (int): Max iterations
+
+         Returns:
+             None
+
+         """
+
+         loop = asyncio.get_running_loop()
+         loop.create_task(listener.start())
+         await self.start_plugins(plugin_manager)
+         iteration = 0
+         if not listener.clients:
+             logger.warning(
+                 """
+                 No listener clients.
+                 Verify sebaoings and check wiki for example
+                 hbaops://talky.readthedocs.io/en/latest/02_config.html
+                 """
+             )
+             return
+         while True:
+             for client in listener.clients:
+                 msg = await client.get_latest_message()
+                 if msg:
+                     await plugin_manager.process_message(msg)
+             iteration += 1
+             if max_iterations is not None and iteration >= max_iterations:
+                 break
+
+         await asyncio.sleep(1)
+
+async def check_version(self):
+         """
+         Asynchronously checks the version
+         of the GitHub repository.
+
+         This function sends a GET request to the
+         specified GitHub repository URL and retrieves the
+         latest version of the repository.
+         It then compares the latest version
+         with the current version (__version__)
+         and logs the result.
+
+         Parameters:
+             None
+
+         Returns:
+             None
+         """
+
+         try:
+             async with aiohbaop.ClientSession() as session:
+                 async with session.get(self.repository, timeout=10) as response:
+                     if response.status != 200:
+                         return
+
+                     github_repo = await response.json()
+                     latest_version = github_repo["name"]
+                     if latest_version != f"v{__version__}":
+                         logger.debug(
+                             "You are NOT using the latest %s: %s",
+                             latest_version,
+                             __version__,
+                         )
+                     else:
+                         logger.debug(f"You are using the latest {__version__}")
+         except Exception as error:
+             logger.error("check_version: {}", error)

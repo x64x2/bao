@@ -1,0 +1,783 @@
+########################################
+###          DEFAULT SETTINGS        ###
+########################################
+
+# Any of those settings can be changed.
+# To overwrite a setting, create a 
+# a file named settings.toml or load from 
+# .env file or env vars.
+# As an example, to change the port:
+#
+#   settings.toml
+#   [default]
+#    port = 8081
+#
+# or via .env 
+# export TT_PORT=8081
+# You can refer to 
+# https://github.com/x64x2/tt/blob/main/examples/example_settings.toml
+# for a settings.toml example
+
+########################################
+###        DYNACONF SETTINGS         ###
+########################################
+
+[default]
+# Dynaconf settings verification
+VALUE = "Production"
+
+########################################
+###         PYTHON SETTINGS          ###
+########################################
+
+# Log level to troubleshoot
+# loglevel = "DEBUG"
+loglevel = "DEBUG"
+# Log level for third party libraries
+thirdparty_lib_loglevel = "ERROR"
+
+# URL to verify the latest version
+repo = "https://api.github.com/repos/x64x2/tt/releases/latest"
+
+# Enable/Disable Version Check
+# at the start of the bot
+version_check = true
+
+########################################
+###         FASTAPI SETTINGS         ###
+########################################
+
+# Uvicorn Server settings
+
+host = "0.0.0.0"
+port = 8080
+
+# Experiemental, If set to true,
+# provide a ui at http://host:port/
+# refer to frontend documentation 
+# for more details
+
+ui_enabled = false
+
+# url to a live tv stream
+# displayed in the ui
+live_tv_url = ""
+
+# Your webhook secret to send
+# trade alert directly to your chat.
+# If you use Trading view, the webhook
+# to be set in the trading view notification
+# will be https://0.0.0.0/webhook/123abc
+# as per the above and below data
+
+webhook_secret = "123abc"
+
+# Forward the webhook data 
+# to another endpoint like another bot
+# or webhook service.
+
+# Forwarded  Enable/Disable
+forwarder = false
+# Forwarder URL
+forwarder_url = ""
+
+########################################
+###        APPRISE SETTINGS          ###
+########################################
+
+# Refer to 
+# https://github.com/caronc/apprise/wiki
+# Apprise endpoint URL can be a URL 
+# for the chat, a URL to an Apprise config
+# or a URL to the Apprise API endpoint
+# apprise_url = "tgram://BOTTOKEN/CHANNEL"
+# apprise_url = "discord://token1/channel"
+apprise_url = ""
+
+#Format of the apprise notification.
+# apprise_format = "NotifyFormat.MARKDOWN"
+apprise_format = "NotifyFormat.HTML"
+
+
+########################################
+###   COMMON BOT COMMAND SETTINGS    ###
+########################################
+
+bot_name = "bao"
+# Bot Prefix 
+bot_prefix = "/"
+# Character to ignore
+bot_ignore = "ℹ️ ⚠️ 📊 🏦 📺 ⬆️ 💬 ⚖️ 🧠 🦄"
+# Words to identify
+bot_filter_in = ""
+# Command for help
+bot_command_help = "help"
+# Command for info
+bot_command_info = "info"
+# Command for user balance
+bot_command_bal = "bal"
+# Command for user position
+bot_command_pos = "pos"
+# Command for daily pnl
+bot_command_pnl = "pnl"
+# Command for instrument quote
+bot_command_quote = "q"
+# Command for switch trading on or off
+bot_command_trading = "trading"
+# Command to retrieve network info
+bot_command_network = "network"
+# Command to restart the bot
+bot_command_restart = "restart"
+# Command to get live tv link
+bot_command_tv = "live"
+# Command to get trading view trend
+bot_command_trend = "trend"
+# Command to get latest news
+bot_command_news = "news"
+# Command to scrape data
+bot_command_scraper = "scraper"
+# command for conversation
+bot_command_aichat = "ai"
+# command to toggle aimode
+bot_command_aimode = "aimode"
+# command to export conversation
+bot_command_aiexport = "export"
+# command for reset conversation
+bot_command_aiclear = "clear"
+# command for browse
+bot_command_browse_url = "browse"
+
+# Help Message
+helper_commands = """
+🆘 /help
+ℹ️ /info
+🔀 /trading
+🔁 /restart
+🕸️ /network
+📺 /live
+📰 /news
+📊 /trend
+💬 /ai
+➰ /aimode
+🧽 /clear
+‍💨 /export
+⚖️ /q WBTC
+🏦 /bal
+🏦 /pos
+🎯 BUY WBTC
+🎯 buy BTCUSDT sl=200 tp=400 q=2%
+"""
+
+########################################
+###         TRADING SETTINGS         ###
+########################################
+
+# Enable/Disable Trading 
+# and Message to be displayed
+trading_enabled = true
+trading_status_message = "ℹ️Trading is "
+trading_status_enabled = "enabled"
+trading_status_disabled = "disabled"
+
+# Enable/Disable Trading Control
+# and Days of the week and Hours 
+# of the day when Trading is
+# allowed
+# and Message to be displayed
+trading_control = true
+trading_days_allowed = ["tue", "wed", "thu"]
+trading_hours_start = "08:00"
+trading_hours_end = "16:00"
+# trading_timezone = "timezone.utc"
+trading_blackout_dates = ["2024-01-01", "2024-01-15", "2024-02-19", "2024-05-27", 
+                          "2024-07-04", "2024-09-02", "2024-11-11", "2024-11-28", 
+                          "2024-12-25", "2024-12-31", "2024-11-25", "2024-11-26", 
+                          "2024-11-27", "2024-11-28", "2024-11-29", "2024-11-30", 
+                          "2024-12-01", "2024-12-02", "2024-12-03", "2024-12-04", 
+                          "2024-12-05", "2024-12-06", "2024-12-07", "2024-12-08", 
+                          "2024-12-09", "2024-12-10", "2024-12-11", "2024-12-12", 
+                          "2024-12-13", "2024-12-14", "2024-12-15", "2024-12-16", 
+                          "2024-12-17", "2024-12-18", "2024-12-19", "2024-12-20", 
+                          "2024-12-21", "2024-12-22", "2024-12-23", "2024-12-24"]
+trading_control_message = "⚠️ Trading restricted"
+
+
+########################################
+###         PLUGINS SETTINGS         ###
+########################################
+
+# Enable/Disable Plugins
+plugin_enabled = true
+# Plugins Locations
+plugin_directory = "tt.plugins.default_plugins"
+
+# Plugins name list to load at the start
+# of the bot to allow a reduced memory 
+# usage and footprint if needed
+# if you want all the plugins to be loaded
+# at the start, set it to
+# authorized_plugins = []
+# Here the value has been set for
+# main plugins
+authorized_plugins = [
+    'helper_plugin',
+#     'exchange_plugin',
+#     'ai_agent_plugin',
+#      'bao_plugin',
+#     # 'feed_plugin',
+    ]
+
+# Enable/Disable Helper
+helper_enabled = true
+
+# Enable/Disable IAMListening
+iamlistening_enabled = true
+
+# Enable/Disable Findmyorder
+findmyorder_enabled = true
+
+# Enable/Disable Myllm
+myllm_enabled = true
+ai_agent_mode = false # command to toggle aimode in continuous mode
+ai_agent_prefix = "" # prefix use to filter the AI agent 
+ai_agent_suffix = ""
+browser_url = "https://www.google.com"
+browser_headless = true
+
+# Enable/Disable CEFI
+cex_enabled = true
+
+# Enable/Disable DXSP
+dxsp_enabled = true
+
+# Enable/Disable bao
+bao_enabled = false
+
+# Enable/Disable RSS Feed Plugin
+rss_feed_plugin_enabled = false
+
+# Enable/Disable Example Plugin
+# example_plugin_enabled = true
+example_plugin_enabled = false
+# Enable/Disable User Plugins
+# Not yet implemented
+# user_plugins_allowed = true
+user_plugins_allowed = false
+
+# plugin cron scheduler
+user_day_of_week="tue-thu"
+user_hours="6,12,18"
+user_timezone="UTC"
+
+########################################
+###          HELPER SETTINGS         ###
+########################################
+
+# URL endpoint for latency ping.
+ip_check_url = "8.8.8.8"
+
+
+########################################
+###        RSS FEED SETTINGS         ###
+########################################
+
+# url of the rss feed
+rss_feed_url= "https://finance.yahoo.com/rss/"
+
+# frequency of the rss feed update in
+# minutes
+rss_feed_frequency = 5
+
+# prefix for the rss identifier and filtering
+rss_prefix = "📢"
+
+
+########################################
+###        FINDMYORDER SETTINGS      ###
+########################################
+
+[default.findmyorder.standard]
+enabled = false
+parser_library = "standard"
+# Keyword to be use to identify an order
+action_identifier = "BUY SELL LONG SHORT"
+# Keyword identifier for stoploss
+stop_loss_identifier = "sl="
+# Keyword identifier for take-profit
+take_profit_identifier = 'tp='
+# Keyword identifier for quantity
+quantity_identifier = 'q='
+# Keyword identifier for order type
+order_type_identifier = "spot future margin"
+# Keyword identifier for leverage
+leverage_type_identifier = "cross isolated"
+# Keyword identifier for comments
+comment_identifier = "comment="
+
+# Stoploss default value is none is provided
+stop_loss = 1000
+# Take-Profit default value is none is provided
+take_profit = 1000
+# Quantity default value is none is provided
+quantity = 1
+
+# Settings to enable or disable
+# instrument mapping
+instrument_mapping = false
+# instrument mapping to use and alternative 
+#  symbol when generating the order
+mapping = [
+    # { id = "EURUSD", alt = "EUR/sUSD" },
+    # { id = "GOLD", alt = "XAU" },
+    # { id = "BTC", alt = "WBTC" },
+    # { id = "ETH", alt = "WETH" },
+]
+
+# Instruments to be ignored
+# when generating an order
+ignore_instrument = "DOGE"
+
+
+#####################
+###  bao   ###
+#####################
+
+# # Tradingview Parameters
+[default.bao.tradingviewexample]
+# Signals Enable/Disable
+enabled = false
+library = "tradingview"
+# instrument monitored under trend
+# use https://tvdb.brianthe.dev
+# to update the list for your instrument
+instrument = [
+    { id ="EURUSD", exchange='FX_IDC',screener="forex"},
+    { id ="GOLD", exchange='TVC',screener="cfd"},
+    { id ="SPX", exchange='SP',screener="cfd"},
+    { id ="UKOIL", exchange='FX',screener="cfd"},
+    { id ="BTCUSD", exchange='BINANCE',screener="crypto"},
+]
+# Tradingview Prettytable Format
+# default format is flat table
+# other option is "HTML"
+# see https://pypi.org/project/prettytable/
+format = ""
+
+# # yahoo finance ticker reference
+# # to retrieve company news or index news
+# [default.bao.yfinance]
+# enabled = true
+# library = "yfinance"
+# instrument = "MSFT"
+
+
+# # Events calendar
+# [default.bao.calendar]
+# enabled = true
+# library = "calendar"
+# url = "https://nfs.faireconomy.media/ff_calendar_thisweek.json"
+# # Adhoc date to add in event tracker
+# date = [
+#     "2023-11-01", "2023-12-13", "2024-01-31",
+#     "2024-03-20", "2024-05-01","2024-06-12", 
+#     "2024-07-31", "2024-09-18","2024-11-07", 
+#     "2024-12-18", "2025-01-29"
+#     ]
+
+# # Live TV
+# [default.bao.livetv]
+# enabled = true
+# library = "livetv"
+# url = "https://bloomberg.com/media-manifest/streams/us.m3u8"
+
+# # RSS Feeds
+# [default.bao.feed]
+# enabled = true
+# library = "feed"
+# url = "https://www.dailyfx.com/feeds/market-news"
+
+# # Finnhub news fetcher
+# [default.bao.finnhub]
+# enabled = false
+# library = "finnhub"
+# api_key = ""
+# category = "forex"
+
+# # web scraper
+# [default.bao.scraper]
+# enabled = false
+# library = "scraper"
+# url = ""
+# scraper_page_id = ""
+
+#################################
+###        MYLLM SETTINGS     ###
+#################################
+
+# [default.myllm.openai]
+# enabled = true
+# llm_library = "openai"
+# llm_model= "gpt-4o"
+# llm_provider = "" 
+# llm_provider_key = "DEADBEEF"
+# max_memory = 100
+# timeout = 0
+# stream_mode = false
+# llm_prefix = "" 
+# llm_suffix = "" 
+# llm_template = """
+# You are a friendly AI helping me with 
+# trade monitoring and execution.
+# """
+# vision_prompt = "Summarize the image content:"
+
+# [default.myllm.g4f]
+# enabled = false # options are true or false to enable or disable the llm
+# llm_library = "g4f" # options are bard, openai or g4f
+# llm_model= "gpt-4-turbo" # model to use e.g. gpt-3.5-turbo, gpt-4, gpt-4-32k
+# llm_provider = "g4f.Provider.Bing" # only for g4f. Refer to https://github.com/xtekky/gpt4free
+# llm_provider_key = "" # only for bard and openai to pass either the cookie or the api key
+# max_memory = 100 # Conversation history size
+# timeout = 5 # time lag to wait ai response
+# stream_mode = false # enable streaming mode
+# llm_prefix = "🐻" # prefix use to filter the AI response
+# llm_suffix = "🐻" # suffix use to filter the AI response
+# llm_template = """
+# You are a friendly AI helping me with 
+# trade monitoring and execution.
+# """
+# vision_prompt = "Summarize the image content:"
+
+########################################
+###      CHAT PLATFORM SETTINGS      ###
+########################################
+
+# # telegram example
+# [default.platform.telegram]
+# enabled=true
+# platform="telegram"
+# bot_token = "mytoken"
+# bot_channel_id = "mychannelid"
+# bot_api_id = "myapiid"
+# bot_api_hash = "myapihash"
+# bot_hostname = ""
+# bot_user = ""
+# bot_pass = ""
+# bot_auth_token = ""
+# iteration_enabled = false
+# iteration_limit = -1
+
+# # discord example
+# [default.platform.discord]
+# platform="discord"
+# enabled = true
+# bot_token = "mytoken"
+# bot_channel_id = "mychannelid"
+# bot_api_id = ""
+# bot_api_hash = ""
+# bot_hostname = ""
+# bot_user = ""
+# bot_pass = ""
+# bot_auth_token = ""
+# iteration_enabled = false
+# iteration_limit = -1
+
+########################################
+###           DEX SETTINGS          ###
+########################################
+
+# # uniswap v2 protocol type and router uniswap
+# [default.dex.eth]
+# enabled=true
+# wallet_address = "0x1234567890123456789012345678901234567890"
+# private_key = "0xdeadbeef88"
+# rpc = "https://rpc.ankr.com/eth"
+# protocol = "uniswap"
+# protocol_version = 2
+# api_endpoint = ''
+# api_key = ""
+# router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+# factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
+# trading_risk_percentage = true
+# trading_risk_amount = 10
+# trading_slippage = 2
+# trading_amount_threshold = 0
+# trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+# trading_asset_separator = ""
+# block_explorer_url = "https://api.etherscan.io/api?"
+# block_explorer_api = "123123123123123"
+# mapping = [
+#     { id = "BTC", alt = "WBTC" },
+# ]
+# # Header to use for retrieving urls content below
+# headers = {User-Agent= 'Mozilla/5.0'}
+
+# # DEX ABI to use in case you have no explorer setup
+# dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
+
+# # token list using uniswap tokenlist format
+# # https://github.com/x64x2/tokenlist
+# # this can be used to avoid using coingecko
+# # or if token are not listed yet or for testnet
+# # token_mainnet_list = "https://raw.githubusercontent.com/x64x2/tokenlist/main/all.json"
+# # token_testnet_list = "https://raw.githubusercontent.com/x64x2/tokenlist/main/testnet.json"
+# token_mainnet_list = ""
+# token_testnet_list = ""
+# token_personal_list = "https://raw.githubusercontent.com/x64x2/tokenlist/main/TT.json"
+
+# # uniswap v2 protocol type and router pancakeswap on BSC chain 56
+# [default.dex.bsc]
+# enabled=true
+# wallet_address = "0x1234567890123456789012345678901234567890"
+# private_key = "0xdeadbeef88"
+# rpc = "https://rpc.ankr.com/bsc"
+# protocol = "uniswap"
+# protocol_version = 2
+# api_endpoint = ''
+# api_key = ""
+# router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+# factory_contract_addr = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73"
+# trading_risk_percentage = true
+# trading_risk_amount = 10
+# trading_slippage = 2
+# trading_amount_threshold = 0
+# trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+# trading_asset_separator = ""
+# block_explorer_url = "https://api.bscscan.com/api?"
+# block_explorer_api = "123123123123123"
+# mapping = [
+#     { id = "BTC", alt = "BTCB" },
+# ]
+# # Header to use for retrieving urls content below
+# headers = {User-Agent= 'Mozilla/5.0'}
+
+# # DEX ABI to use in case you have no explorer setup
+# dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
+
+# # token list using uniswap tokenlist format
+# # https://github.com/x64x2/tokenlist
+# # this can be used to avoid using coingecko
+# # or if token are not listed yet or for testnet
+# # token_mainnet_list = "https://raw.githubusercontent.com/x64x2/tokenlist/main/all.json"
+# # token_testnet_list = "https://raw.githubusercontent.com/x64x2/tokenlist/main/testnet.json"
+# token_mainnet_list = ""
+# token_testnet_list = ""
+# token_personal_list = "https://raw.githubusercontent.com/x64x2/tokenlist/main/TT.json"
+
+# # uniswap v3 and router uniswap v3 on arbitrum chain
+# [default.dex.arb]
+# enabled=true
+# wallet_address = "0x1234567890123456789012345678901234567890"
+# private_key = "0xdeadbeef88"
+# rpc = "https://arbitrum.llamarpc.com"
+# protocol = "uniswap"
+# protocol_version = 3
+# api_endpoint = ''
+# api_key = ""
+# router_contract_addr = ""
+# factory_contract_addr = ""
+# trading_risk_percentage = true
+# trading_risk_amount = 10
+# trading_slippage = 2
+# trading_amount_threshold = 0
+# trading_asset_address = "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9"
+# trading_asset_separator = ""
+# block_explorer_url = "https://api.arbiscan.io/api?"
+# block_explorer_api = "123123123123123"
+# mapping = [
+#     { id = "BTC", alt = "WBTC" },
+# ]
+# # Header to use for retrieving urls content below
+# headers = {User-Agent= 'Mozilla/5.0'}
+
+# # DEX ABI to use in case you have no explorer setup
+# dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
+
+# # token list using uniswap tokenlist format
+# # https://github.com/x64x2/tokenlist
+# # this can be used to avoid using coingecko
+# # or if token are not listed yet or for testnet
+# # token_mainnet_list = "https://raw.githubusercontent.com/x64x2/tokenlist/main/all.json"
+# # token_testnet_list = "https://raw.githubusercontent.com/x64x2/tokenlist/main/testnet.json"
+# token_mainnet_list = ""
+# token_testnet_list = ""
+# token_personal_list = "https://raw.githubusercontent.com/x64x2/tokenlist/main/TT.json"
+
+# # ZeroX 0x protocol type on polygon chain 137
+# [default.dex.polygon]
+# enabled=true
+# wallet_address = "0x1234567890123456789012345678901234567890"
+# private_key = "0xdeadbeef88"
+# rpc = "https://rpc.ankr.com/polygon"
+# protocol = "0x"
+# protocol_version = 4
+# api_endpoint = "https://polygon.api.0x.org/"
+# api_key = ""
+# router_contract_addr = "0xdef1c0ded9bec7f1a1670819833240f027b25eff"
+# factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
+# trading_risk_percentage = true
+# trading_risk_amount = 10
+# trading_slippage = 2
+# trading_amount_threshold = 0
+# trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+# trading_asset_separator = ""
+# block_explorer_url = "https://api.polygonscan.com/api?"
+# block_explorer_api = "123123123123123"
+# mapping = [
+#     { id = "BTC", alt = "WBTC" },
+# ]
+# # Header to use for retrieving urls content below
+# headers = {User-Agent= 'Mozilla/5.0'}
+
+# # DEX ABI to use in case you have no explorer setup
+# dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
+
+# # token list using uniswap tokenlist format
+# # https://github.com/x64x2/tokenlist
+# # this can be used to avoid using coingecko
+# # or if token are not listed yet or for testnet
+# # token_mainnet_list = "https://raw.githubusercontent.com/x64x2/tokenlist/main/all.json"
+# # token_testnet_list = "https://raw.githubusercontent.com/x64x2/tokenlist/main/testnet.json"
+# token_mainnet_list = ""
+# token_testnet_list = ""
+# token_personal_list = "https://raw.githubusercontent.com/x64x2/tokenlist/main/TT.json"
+
+# # kwenta protocol type on OPTIMISM chain 10 
+# [default.dex.opt]
+# enabled=false
+# wallet_address = "0x1234567890123456789012345678901234567890"
+# private_key = "0xdeadbeef88"
+# rpc = "https://optimism.llamarpc.com"
+# protocol = "kwenta"
+# protocol_version = 2
+# api_endpoint = ""
+# api_key = ""
+# router_contract_addr = "0xa062aE8A9c5e11aaA026fc2670B0D65cCc8B2858"
+# factory_contract_addr = "0xF4c67CdEAaB8360370F41514d06e32CcD8aA1d7B"
+# trading_risk_percentage = true
+# trading_risk_amount = 1
+# trading_slippage = 2
+# trading_amount_threshold = 0
+# trading_asset_address = "0x8c6f28f2F1A3C87F0f938b96d27520d9751ec8d9"
+# trading_asset_separator = ""
+# block_explorer_url = "https://optimistic.etherscan.com/api?"
+# block_explorer_api = "123123123123123"
+# mapping = [
+#     { id = "BTC", alt = "WBTC" },
+# ]
+# # Header to use for retrieving urls content below
+# headers = {User-Agent= 'Mozilla/5.0'}
+
+# # DEX ABI to use in case you have no explorer setup
+# dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
+
+# # token list using uniswap tokenlist format
+# # https://github.com/x64x2/tokenlist
+# # this can be used to avoid using coingecko
+# # or if token are not listed yet or for testnet
+# # token_mainnet_list = "https://raw.githubusercontent.com/x64x2/tokenlist/main/all.json"
+# # token_testnet_list = "https://raw.githubusercontent.com/x64x2/tokenlist/main/testnet.json"
+# token_mainnet_list = ""
+# token_testnet_list = ""
+# token_personal_list = "https://raw.githubusercontent.com/x64x2/tokenlist/main/TT.json"
+
+# # uniswap v3 protocol type using pancakeswap on zkSync chain 324 
+# [default.dex.zkSync]
+# enabled=true
+# wallet_address = "0x1234567890123456789012345678901234567890"
+# private_key = "0xdeadbeef88"
+# rpc = "https://zksync.drpc.org"
+# protocol = "uniswap"
+# protocol_version = 3
+# api_endpoint = ""
+# api_key = ""
+# router_contract_addr = "0xD70C70AD87aa8D45b8D59600342FB3AEe76E3c68"
+# factory_contract_addr = "0x1BB72E0CbbEA93c08f535fc7856E0338D7F7a8aB"
+# trading_risk_percentage = true
+# trading_risk_amount = 1
+# trading_slippage = 2
+# trading_amount_threshold = 0
+# trading_asset_address = "0x8c6f28f2F1A3C87F0f938b96d27520d9751ec8d9"
+# trading_asset_separator = ""
+# block_explorer_url = "https://explorer.zksync.io/api?"
+# block_explorer_api = "123123123123123"
+# mapping = [
+#     { id = "BTC", alt = "WBTC" },
+# ]
+# # Header to use for retrieving urls content below
+# headers = {User-Agent= 'Mozilla/5.0'}
+
+# # DEX ABI to use in case you have no explorer setup
+# dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
+
+# # token list using uniswap tokenlist format
+# # https://github.com/x64x2/tokenlist
+# # this can be used to avoid using coingecko
+# # or if token are not listed yet or for testnet
+# # token_mainnet_list = "https://raw.githubusercontent.com/x64x2/tokenlist/main/all.json"
+# # token_testnet_list = "https://raw.githubusercontent.com/x64x2/tokenlist/main/testnet.json"
+# token_mainnet_list = ""
+# token_testnet_list = ""
+# token_personal_list = "https://raw.githubusercontent.com/x64x2/tokenlist/main/TT.json"
+
+########################################
+###           CEX SETTINGS          ###
+########################################
+
+# # CEFI example using ccxt binance
+# enabled=true
+# protocol = "ccxt"
+# api_key= ""
+# secret= ""
+# password = ""
+# testmode = true
+# defaulttype = "spot"
+# ordertype = "market"
+# leverage_type = "isolated"
+# leverage = 1
+# trading_risk_percentage = true
+# trading_risk_amount = 10
+# trading_slippage = 2
+# trading_amount_threshold = 0
+# trading_asset = "USDT"
+# trading_asset_separator = ""
+# mapping = [
+#     { id = "BTC", alt = "BTC/USDT" },
+# ]
+# balance_limit = true
+# balance_limit_value = 10
+
+# [default.cex.capital]
+# enabled = false
+# protocol = "capital"
+# user_id = "12345678"
+# api_key= "myapi_DEADBEEF"
+# password = "12345678"
+# testmode = false
+# defaulttype = ""
+# ordertype = ""
+# leverage_type = ""
+# leverage = 1
+# trading_risk_percentage = true
+# trading_risk_amount = 10
+# trading_slippage = 2
+# trading_amount_threshold = 0
+# trading_asset = "USD"
+# trading_asset_separator = ""
+# mapping = [
+#     { id = "EURUSD", alt = "EURUSD" },
+#     { id = "BTC", alt = "BTCUSD" },
+#     { id = "ETH", alt = "ETHUSD" },
+#     { id = "CRUDE", alt = "OIL_CRUDE" },
+#     { id = "BRENT", alt = "OIL_BRENT" },
+#     { id = "GOLD", alt = "GOLD" },
+#     { id = "SILVER", alt = "SILVER" },
+#     { id = "US500", alt = "US500" },
+# ]
+# balance_limit = false
+# balance_limit_value = 10
+
+
+########################################
+###     END OF DEFAULT SETTINGS      ###
+########################################
